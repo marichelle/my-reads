@@ -1,7 +1,7 @@
 // Import Components
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import Book from './Book'
+import BookShelf from './BookShelf'
 
 const shelves = [
   { id: 'currentlyReading', name: 'Currently Reading', show: true },
@@ -11,13 +11,16 @@ const shelves = [
 ]
 
 class ListBooks extends Component {
-  // Component State
   state = {
   }
 
   // Custom Methods
   onShelfChange = (book, shelf) => {
     this.props.updateBook(book, shelf)
+  }
+
+  // Lifecycle Methods
+  componentDidMount() {
   }
 
   // Render Method
@@ -30,23 +33,11 @@ class ListBooks extends Component {
         <div className="list-books-content">
           <div>
             {shelves.map((shelf) => (shelf.show) && (
-              <div className="bookshelf" key={shelf.id}>
-                <h2 className="bookshelf-title">
-                  {shelf.name}
-                </h2>
-                <div className="bookshelf-books">
-                  <ol className="books-grid">
-                    {this.props.books
-                      .filter((book) => book.shelf === shelf.id)
-                      .map((book) => (
-                        <li key={book.id}>
-                          <Book book={book} onShelfChange={this.onShelfChange} />
-                        </li>
-                      )
-                    )}
-                  </ol>
-                </div>
-              </div>
+              <BookShelf
+                key={shelf.id}
+                shelf={shelf}
+                books={this.props.books}
+                onShelfChange={this.onShelfChange} />
             ))}
           </div>
         </div>

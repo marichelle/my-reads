@@ -25,12 +25,15 @@ class BooksApp extends Component {
       for (const shelf of Object.entries(resp)) {
         for (const bookId of shelf[1]) {
           const newBookObj = booksById[bookId]
+
           newBookObj.shelf = shelf[0]
           books.push(newBookObj)
         }
       }
 
-      this.setState(books)
+      this.setState({
+        books: books
+      })
     })
   }
 
@@ -48,9 +51,7 @@ class BooksApp extends Component {
         <Route path="/" exact render={() => (
           <ListBooks
             books={this.state.books}
-            updateBook={(book, shelf) => {
-              this.updateBook(book, shelf)
-            }} />
+            updateBook={this.updateBook} />
         )} />
 
         <Route path="/search" render={() => (
