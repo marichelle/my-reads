@@ -18,36 +18,22 @@ class ListBooks extends Component {
   }
 
   // Custom Methods
+  getBooks = () => {
+    BooksAPI.getAll().then((books) => {
+      this.setState({books})
+    })
+  }
+
   updateBook = (book, shelf) => {
     // Update book in "database"
     BooksAPI.update(book, shelf).then((resp) => {
-      const books = []
-      const booksById = this.state.books.reduce((obj, item) => {
-        obj[item.id] = item
-        return obj
-      }, {})
-
-      // Update state
-      for (const shelf of Object.entries(resp)) {
-        for (const bookId of shelf[1]) {
-          const newBookObj = booksById[bookId]
-
-          newBookObj.shelf = shelf[0]
-          books.push(newBookObj)
-        }
-      }
-
-      this.setState({
-        books: books
-      })
+      this.getBooks()
     })
   }
 
   // Lifecycle Methods
   componentDidMount() {
-    BooksAPI.getAll().then((books) => {
-      this.setState({books})
-    })
+    this.getBooks()
   }
 
   // Render Method
