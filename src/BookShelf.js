@@ -4,7 +4,7 @@ import Book from './Book'
 class BookShelf extends Component {
   // Custom Methods
   onShelfChange = (book, shelf) => {
-    this.props.onShelfChange(book, shelf)
+    this.props.updateBook(book, shelf)
   }
 
   render() {
@@ -15,9 +15,7 @@ class BookShelf extends Component {
         </h2>
         <div className="bookshelf-books">
           <ol className="books-grid">
-            {this.props.books
-              .filter((book) => book.shelf === this.props.shelf.id)
-              .map((book) => (
+            {this.props.shelfBooks.map((book) => (
               <li key={book.id}>
                 <Book
                   book={book}
