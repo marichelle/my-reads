@@ -6,16 +6,25 @@ import * as BooksAPI from './BooksAPI'
 class SearchBooks extends Component {
   // Component State
   state = {
-    books: [],
-    query: ''
+    query: '',
+    results: []
   }
 
   // Custom Methods
   clearQuery = () => {
     this.setState({
-      books: [],
-      query: ''
+      query: '',
+      results: []
     })
+  }
+
+  locateBook = (bookId) => {
+    const find = this.props.books.filter((book) => book.id === bookId)
+    return find.length ? find[0].shelf : 'none'
+  }
+
+  updateBook = (book, shelf) => {
+    this.props.updateBook(book, shelf)
   }
 
   updateQuery = (query) => {
@@ -24,10 +33,10 @@ class SearchBooks extends Component {
     })
 
     if (query.length) {
-      BooksAPI.search(query).then((books) => {
-        if (books.length) {
+      BooksAPI.search(query).then((results) => {
+        if (results.length) {
           this.setState({
-            books: books
+            results: results
           })
         }
       })
@@ -36,12 +45,9 @@ class SearchBooks extends Component {
     }
   }
 
-  onShelfChange = (book, shelf) => {
-    this.props.updateBook(book, shelf)
-  }
-
+  // Render Method
   render() {
-    const { books, query } = this.state
+    const { query, results } = this.state
 
     return (
       <div className="search-books">
@@ -65,16 +71,17 @@ class SearchBooks extends Component {
 
           {((query.length !== 0) && (
             <div className="showing-books">
-              <h4>{books.length} books found</h4>
+              <h4>{results.length} books found</h4>
             </div>
           ))}
 
           <ol className="books-grid">
-            {books.map((book) => (
+            {results.map((book) => (
               <li key={book.id}>
                 <Book
                   book={book}
-                  onShelfChange={this.onShelfChange} />
+                  shelf={this.locateBook(book.id)}
+                  updateBook={this.updateBook} />
               </li>
               )
             )}

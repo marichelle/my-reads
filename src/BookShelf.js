@@ -5,10 +5,11 @@ class BookShelf extends Component {
   state = {}
 
   // Custom Methods
-  onShelfChange = (book, shelf) => {
+  updateBook = (book, shelf) => {
     this.props.updateBook(book, shelf)
   }
 
+  // Render Method
   render() {
     const { shelf, shelfBooks } = this.props
 
@@ -23,7 +24,8 @@ class BookShelf extends Component {
               <li key={book.id}>
                 <Book
                   book={book}
-                  onShelfChange={this.onShelfChange} />
+                  shelf={book.shelf}
+                  updateBook={this.updateBook} />
               </li>
               )
             )}

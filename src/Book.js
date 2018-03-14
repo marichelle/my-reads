@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 
 class Book extends Component {
+  // Render Method
   render() {
-    const { book, onShelfChange } = this.props
-    const { title, authors, imageLinks, shelf } = this.props.book
+    const { book, shelf, updateBook } = this.props
+    const { title, authors, imageLinks } = this.props.book
     const thumbnail = imageLinks !== undefined ? imageLinks.thumbnail : 'http://via.placeholder.com/128x193?text=No+Image+Found'
 
     return (
@@ -13,11 +14,11 @@ class Book extends Component {
           <div className="book-shelf-changer">
             <select
               value={shelf}
-              onChange={(event) => onShelfChange(
+              onChange={(event) => updateBook(
                 book,
                 event.target.value
               )}>
-              <option value="none" disabled>Move to...</option>
+              <option disabled>Move to...</option>
               <option value="currentlyReading">Currently Reading</option>
               <option value="wantToRead">Want to Read</option>
               <option value="read">Read</option>

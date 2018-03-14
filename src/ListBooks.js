@@ -2,7 +2,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import BookShelf from './BookShelf'
-import * as BooksAPI from './BooksAPI'
 
 const shelves = [
   { id: 'currentlyReading', name: 'Currently Reading', show: true },
@@ -12,31 +11,16 @@ const shelves = [
 ]
 
 class ListBooks extends Component {
-  // Component State
-  state = {
-    books: []
-  }
+  state = {}
 
   // Custom Methods
-  getBooks = () => {
-    BooksAPI.getAll().then((books) => {
-      this.setState({books})
-    })
-  }
-
   updateBook = (book, shelf) => {
-    // Update book in "database"
-    BooksAPI.update(book, shelf).then(this.getBooks)
-  }
-
-  // Lifecycle Methods
-  componentDidMount() {
-    this.getBooks()
+    this.props.updateBook(book, shelf)
   }
 
   // Render Method
   render() {
-    const { books } = this.state
+    const { books } = this.props
 
     return (
       <div className="list-books">
