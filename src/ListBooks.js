@@ -26,9 +26,7 @@ class ListBooks extends Component {
 
   updateBook = (book, shelf) => {
     // Update book in "database"
-    BooksAPI.update(book, shelf).then((resp) => {
-      this.getBooks()
-    })
+    BooksAPI.update(book, shelf).then(this.getBooks)
   }
 
   // Lifecycle Methods
@@ -38,6 +36,8 @@ class ListBooks extends Component {
 
   // Render Method
   render() {
+    const { books } = this.state
+
     return (
       <div className="list-books">
         <div className="list-books-title">
@@ -49,7 +49,7 @@ class ListBooks extends Component {
               <BookShelf
                 key={shelf.id}
                 shelf={shelf}
-                shelfBooks={this.state.books.filter((book) => book.shelf === shelf.id)}
+                shelfBooks={books.filter((book) => book.shelf === shelf.id)}
                 updateBook={this.updateBook} />
             ))}
           </div>
