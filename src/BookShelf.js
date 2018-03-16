@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import Book from './Book'
 
 class BookShelf extends Component {
-  state = {}
-
   // Custom Methods
   updateBook = (book, shelf) => {
     this.props.updateBook(book, shelf)

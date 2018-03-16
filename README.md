@@ -1,6 +1,10 @@
 # MyReads Project
 
-This is my final assessment project for Udacity's React Fundamentals course.
+This is my final assessment project for Udacity's React Fundamentals course.## Requirements
+
+## Requirements
+
+For development, you will only need Node.js installed on your environement.
 
 ## Getting Started
 
