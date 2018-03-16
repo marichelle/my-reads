@@ -5,6 +5,7 @@ class Book extends Component {
   render() {
     const { book, shelf, updateBook } = this.props
     const { title, authors, imageLinks } = this.props.book
+    // fallback thumbnail
     const thumbnail = imageLinks !== undefined ? imageLinks.thumbnail : 'http://via.placeholder.com/128x193?text=No+Image+Found'
 
     return (
