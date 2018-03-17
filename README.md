@@ -1,6 +1,6 @@
 # MyReads Project
 
-This is my final assessment project for Udacity's React Fundamentals course.## Requirements
+This is my final assessment project for Udacity's React Fundamentals course.
 
 ## Requirements
 
